@@ -73,6 +73,9 @@
   .hero-cta{display:inline-flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--gothic);font-size:.92rem;letter-spacing:.16em;font-weight:700;color:var(--gold-bright);background:var(--sumi);padding:14px 42px;border-radius:2px;transition:all .25s;box-shadow:0 8px 22px rgba(40,30,12,.28)}
   .hero-cta .scroll{font-family:var(--latin);font-style:italic;font-size:.72rem;letter-spacing:.1em;opacity:.72}
   .hero-cta:hover,.hero-cta:focus-visible{transform:translateY(-2px);box-shadow:0 12px 28px rgba(40,30,12,.36)}
+  .hero-cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .hero-cta-alt{background:linear-gradient(180deg,#3CB5A6,#1F9E8F);color:#FFFCF4;box-shadow:0 8px 22px rgba(31,158,143,.3)}
+  .hero-cta-alt:hover,.hero-cta-alt:focus-visible{box-shadow:0 12px 28px rgba(31,158,143,.4)}
 
   /* ---------- intro ---------- */
   .intro{padding:66px 24px 8px;text-align:center}
@@ -228,7 +231,10 @@
     <h1>Sacred Tracing Sheets</h1>
     <div class="hero-en">Trace &amp; Be Still</div>
     <p>Quiet the mind, one stroke at a time.<br>Sacred scripts and sigils, to trace by hand.</p>
-    <a class="hero-cta" href="#catalog"><span>Browse the books</span><span class="scroll">scroll</span></a>
+    <div class="hero-cta-row">
+      <a class="hero-cta" href="#catalog"><span>Browse the books</span><span class="scroll">scroll</span></a>
+      <a class="hero-cta hero-cta-alt" href="#matoi"><span>Temporary Tattoos</span><span class="scroll">new</span></a>
+    </div>
   </div>
 </section>
 
