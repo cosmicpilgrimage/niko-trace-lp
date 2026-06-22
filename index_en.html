@@ -122,6 +122,8 @@
   .seg button.on{background:var(--ink);color:var(--paper)}
   .price{font-family:var(--mincho);font-weight:600;font-size:1.05rem;color:var(--ink);margin-bottom:12px}
   .price small{font-family:var(--gothic);font-weight:400;font-size:.74rem;color:var(--ink-soft);letter-spacing:.06em;margin-left:.4em}
+  .best{display:inline-block;margin-left:.5em;font-size:.62rem;font-weight:700;letter-spacing:.08em;background:var(--gold);color:var(--sumi);border-radius:999px;padding:2px 9px;vertical-align:middle}
+  .per-rep{font-size:.76rem;color:var(--gold-deep);letter-spacing:.02em;margin:-6px 0 12px}
   .variant{display:none;flex-direction:column;gap:9px}
   .variant.on{display:flex}
   .btn{display:flex;align-items:center;justify-content:space-between;font-size:.84rem;letter-spacing:.03em;padding:10px 15px;border-radius:3px;transition:transform .15s, box-shadow .15s, background .2s}
@@ -391,6 +393,11 @@ function slider(b){
     </div>`;
 }
 
+function perRep(priceStr, reps){
+  var n = parseFloat(String(priceStr).replace(/[^0-9.]/g,""));
+  if(!n) return "";
+  return "\u2248 $" + (n/reps).toFixed(2) + " per use";
+}
 function card(b){
   return `<article class="book-card">
     ${slider(b)}
@@ -400,16 +407,18 @@ function card(b){
     <p class="book-blurb">${b.blurb}</p>
     <div class="buy">
       <div class="seg" role="group" aria-label="Choose edition">
-        <button class="on" data-v="30" aria-pressed="true">30 rounds</button>
-        <button data-v="100" aria-pressed="false">100 rounds</button>
+        <button class="on" data-v="100" aria-pressed="true">100 rounds</button>
+        <button data-v="30" aria-pressed="false">30 rounds</button>
       </div>
-      <div class="variant on" data-v="30">
-        <div class="price">${b.v30.price}<small>30 rounds</small></div>
-        ${buttons(b.v30)}
-      </div>
-      <div class="variant" data-v="100">
-        <div class="price">${b.v100.price}<small>100 rounds</small></div>
+      <div class="variant on" data-v="100">
+        <div class="price">${b.v100.price}<small>100 rounds</small><span class="best">Best value</span></div>
+        <div class="per-rep">${perRep(b.v100.price,100)}</div>
         ${buttons(b.v100)}
+      </div>
+      <div class="variant" data-v="30">
+        <div class="price">${b.v30.price}<small>30 rounds</small></div>
+        <div class="per-rep">${perRep(b.v30.price,30)}</div>
+        ${buttons(b.v30)}
       </div>
     </div>
   </article>`;
