@@ -47,31 +47,35 @@ h1,h2,h3,.disp{font-family:'Newsreader',serif;font-weight:400;line-height:1.4}
 
 /* ---- hero ---- */
 .hero{
-  position:relative;padding:110px 0 96px;text-align:center;overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 34%, #FFFFFF 0%, var(--mizu) 42%, var(--washi) 72%);
+  position:relative;padding:0;text-align:center;overflow:hidden;
+  min-height:clamp(440px,74vh,640px);
+  display:flex;align-items:center;justify-content:center;
+  background:#0d1520;
 }
-.disc{
-  width:172px;height:172px;border-radius:50%;margin:0 auto 46px;position:relative;
-  background:radial-gradient(circle at 50% 44%, #FFFFFF 0%, #F4F8FA 52%, #E4EDF1 100%);
-  box-shadow:0 0 0 1px #FFF, 0 0 64px 22px rgba(196,216,226,.5);
+.hero-img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:center 40%;
 }
-.smoke{position:absolute;left:50%;bottom:100%;width:1px;height:120px;
-  background:linear-gradient(to top, var(--gin-pale), transparent);
-  transform:translateX(-50%);opacity:.8}
+.hero-veil{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom, rgba(10,16,26,.44) 0%, rgba(10,16,26,.10) 32%, rgba(10,16,26,.28) 60%, rgba(10,16,26,.74) 100%);
+}
+.hero-inner{position:relative;z-index:2;padding:64px 28px;width:100%}
 .hero h1{
-  font-size:clamp(1.9rem,5.4vw,2.7rem);letter-spacing:.22em;
-  margin-bottom:8px;font-weight:400;
+  font-size:clamp(2rem,6vw,3rem);letter-spacing:.22em;
+  margin-bottom:10px;font-weight:400;color:#FBFAF8;
+  text-shadow:0 2px 30px rgba(0,0,0,.6);
 }
 .hero .romaji{
-  font-size:.66rem;letter-spacing:.34em;color:var(--gin);margin-bottom:44px;
-  text-transform:uppercase;
+  font-size:.68rem;letter-spacing:.36em;color:#E6EDF2;margin-bottom:40px;
+  text-transform:uppercase;text-shadow:0 1px 16px rgba(0,0,0,.65);
 }
 .hero .lede{
-  font-family:'Newsreader',serif;
-  font-size:clamp(1.12rem,2.6vw,1.4rem);line-height:1.95;font-weight:300;
+  font-family:'Newsreader',serif;color:#FBFAF8;
+  font-size:clamp(1.14rem,2.7vw,1.44rem);line-height:1.95;font-weight:300;
+  text-shadow:0 2px 24px rgba(0,0,0,.72);
 }
-.hero .lede em{font-style:normal;color:var(--honoo)}
+.hero .lede em{font-style:normal;color:#F3B57E}
 
 /* ---- generic ---- */
 .lead{font-size:.98rem;line-height:1.95}
@@ -196,8 +200,7 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.1em;font-size:.7r
 
 @media(max-width:680px){
   section{padding:66px 0}
-  .hero{padding:80px 0 70px}
-  .disc{width:130px;height:130px;margin-bottom:34px}
+  .hero{min-height:66vh}
   .pair,.gifts,.ishou,.plans{grid-template-columns:1fr}
   .gifts,.ishou{gap:34px}
   .step{gap:16px}
@@ -213,8 +216,9 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.1em;font-size:.7r
 
 <!-- ═══ HERO ═══ -->
 <header class="hero">
-  <div class="wrap">
-    <div class="disc"><span class="smoke"></span></div>
+  <img class="hero-img" src="en_tsukihi_hero.jpg" alt="Letters and a sigil burning on a bamboo frame under a full moon.">
+  <span class="hero-veil"></span>
+  <div class="hero-inner">
     <h1>NIKO TSUKIHI</h1>
     <p class="romaji">Moon &amp; Fire</p>
     <p class="lede">
@@ -268,6 +272,13 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.1em;font-size:.7r
       </div>
       <div class="step">
         <span class="n">IV</span>
+        <div>
+          <h3>Returned to water</h3>
+          <p>The ashes are carried to a nearby river and let go. Released first by fire, and then by water.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="n">V</span>
         <div>
           <h3>The record arrives</h3>
           <p>Within a few days, a private video link is sent to your email.</p>
