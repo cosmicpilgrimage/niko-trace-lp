@@ -186,6 +186,20 @@
   .pt p{font-size:.86rem;line-height:1.75;color:var(--ink-soft)}
   .about-note{max-width:640px;margin:34px auto 0;text-align:center;font-size:.8rem;color:var(--ink-soft);line-height:1.9}
   @media (max-width:680px){.about-lead{grid-template-columns:1fr;gap:24px}.about-points{grid-template-columns:1fr}}
+
+  .nav-toggle{display:none}
+  .nav-btn{display:none}
+  @media (max-width:680px){
+    .site-head .wrap{align-items:center}
+    .nav-btn{display:flex;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;cursor:pointer;padding:5px;background:none;border:0}
+    .nav-btn span{display:block;height:2px;width:100%;background:var(--ink);border-radius:2px;transition:transform .25s, opacity .2s}
+    .nav{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--paper,#F5EEE0);border-bottom:1px solid var(--line);box-shadow:0 10px 24px rgba(60,42,12,.12);max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .nav a{padding:14px 24px;border-top:1px solid var(--line);font-size:.9rem}
+    .nav-toggle:checked ~ .nav{max-height:340px}
+    .nav-toggle:checked ~ .nav-btn span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .nav-toggle:checked ~ .nav-btn span:nth-child(2){opacity:0}
+    .nav-toggle:checked ~ .nav-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  }
   .matoi{padding:56px 0 8px}
   .matoi .series-note{max-width:42em}
   .matoi-card .sframe{aspect-ratio:1/1}
@@ -204,6 +218,8 @@
 <header class="site-head">
   <div class="wrap">
     <div class="brand">虹鼓<span class="en">niko</span></div>
+    <input type="checkbox" id="navtoggle" class="nav-toggle" hidden>
+    <label for="navtoggle" class="nav-btn" aria-label="Menu"><span></span><span></span><span></span></label>
     <nav class="nav">
       <a href="#catalog">Books</a>
       <a href="#about">What is tracing</a>
@@ -239,7 +255,7 @@
   <div class="series-head"><span class="series-eyebrow">What is Tracing</span><h2>What is tracing?</h2></div>
   <hr class="trace-rule">
   <div class="about-lead">
-    <p>Tracing is a simple, quiet practice — you follow the lines of a sacred script or sigil, one stroke at a time. No skill or calligraphy experience is needed; as you follow each line, your breath settles and your mind grows still. For centuries, copying sacred letters has been a form of prayer and purification, and these books bring that tradition into a simple daily ritual. Experiences vary — you only need to begin with a single stroke.</p>
+    <p>Tracing is a simple, quiet practice — you follow the lines of a sacred script or sigil, one stroke at a time. No skill or calligraphy experience is needed; as you follow each line, your breath settles and your mind grows still — a quiet moment of meditation and inner reflection, turning your attention inward as your hand moves. For centuries, copying sacred letters has been a form of prayer and purification, and these books bring that tradition into a simple daily ritual. Experiences vary — you only need to begin with a single stroke.</p>
     <figure class="about-photo"><img src="about_tracing.jpg" alt="A hand tracing the Clauneck Goetia sigil with a fineliner pen"></figure>
   </div>
   <div class="about-points">

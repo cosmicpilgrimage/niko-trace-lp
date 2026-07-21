@@ -189,6 +189,20 @@
   .about-note{max-width:640px;margin:34px auto 0;text-align:center;font-size:.8rem;color:var(--ink-soft);line-height:1.9}
   @media (max-width:680px){.about-lead{grid-template-columns:1fr;gap:24px}.about-points{grid-template-columns:1fr}}
 
+  .nav-toggle{display:none}
+  .nav-btn{display:none}
+  @media (max-width:680px){
+    .site-head .wrap{align-items:center}
+    .nav-btn{display:flex;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;cursor:pointer;padding:5px;background:none;border:0}
+    .nav-btn span{display:block;height:2px;width:100%;background:var(--ink);border-radius:2px;transition:transform .25s, opacity .2s}
+    .nav{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--paper,#F5EEE0);border-bottom:1px solid var(--line);box-shadow:0 10px 24px rgba(60,42,12,.12);max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .nav a{padding:14px 24px;border-top:1px solid var(--line);font-size:.9rem}
+    .nav-toggle:checked ~ .nav{max-height:340px}
+    .nav-toggle:checked ~ .nav-btn span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .nav-toggle:checked ~ .nav-btn span:nth-child(2){opacity:0}
+    .nav-toggle:checked ~ .nav-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  }
+
   /* ---------- MATOI (tattoo seals / BASE) ---------- */
   .matoi{padding:56px 0 8px}
   .matoi .series-note{max-width:42em}
@@ -209,6 +223,8 @@
 <header class="site-head">
   <div class="wrap">
     <div class="brand">虹鼓<span class="en">niko</span></div>
+    <input type="checkbox" id="navtoggle" class="nav-toggle" hidden>
+    <label for="navtoggle" class="nav-btn" aria-label="Menu"><span></span><span></span><span></span></label>
     <nav class="nav">
       <a href="#catalog">本一覧</a>
       <a href="#about">なぞり書きとは</a>
@@ -244,7 +260,7 @@
   <div class="series-head"><span class="series-eyebrow">What is Tracing</span><h2>なぞり書きとは</h2></div>
   <hr class="trace-rule">
   <div class="about-lead">
-    <p>「なぞり書き」は、神聖な文字やシジル（印章）の線を、筆ペンやペンで一画ずつなぞっていく、静かな実践です。うまく書く必要も、書の経験もいりません。線を追ううちに呼吸が整い、心が静まっていきます。古来、神聖な文字を書き写すことは祈りや浄化の作法として親しまれてきました。その伝統を日々の暮らしに。感じ方には個人差がありますが、まずは一画から。</p>
+    <p>「なぞり書き」は、神聖な文字やシジル（印章）の線を、筆ペンやペンで一画ずつなぞっていく、静かな実践です。うまく書く必要も、書の経験もいりません。線を追ううちに呼吸が整い、心が静まっていきます。手を動かしながら内へと意識を向ける、静かな内観と瞑想のひとときです。古来、神聖な文字を書き写すことは祈りや浄化の作法として親しまれてきました。その伝統を日々の暮らしに。感じ方には個人差がありますが、まずは一画から。</p>
     <figure class="about-photo"><img src="about_tracing_ja.jpg" alt="筆ペンで龍体文字フトマニ図をなぞる手元"></figure>
   </div>
   <div class="about-points">
