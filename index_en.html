@@ -135,8 +135,8 @@
   .btn:hover,.btn:focus-visible{transform:translateY(-1px)}
   .btn-jp{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:var(--sumi);font-weight:700}
   .btn-jp:hover{box-shadow:0 6px 16px rgba(176,134,58,.32)}
-  .btn-com{background:transparent;border:1px solid var(--gold);color:var(--gold-deep);font-weight:700}
-  .btn-com:hover{background:rgba(176,134,58,.08)}
+  .btn-com{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:var(--sumi);font-weight:700}
+  .btn-com:hover{box-shadow:0 6px 16px rgba(176,134,58,.32)}
   .btn-lulu{background:transparent;border:1px solid var(--line);color:var(--ink-soft)}
   .btn-lulu:hover{border-color:var(--ink-soft);color:var(--ink)}
 
@@ -337,8 +337,8 @@ const SERIES = [
         v100:{price:"$19.99", jp:"", com:"https://www.amazon.com/dp/B0H3Z6YX7J", lulu:"https://www.lulu.com/shop/niko/7-archangel-sigils-tracing-sheet-100/paperback/product-nvr275v.html"} },
       { ja:"The Grand Pentacle of Solomon", en:"Seal of Protection", tag:"Pen", imgs:["en_26_grand_pentacle_solomon_0.jpg","en_26_grand_pentacle_solomon_1.jpg","en_26_grand_pentacle_solomon_2.jpg"],
         blurb:"A sacred talisman from the Key of Solomon, said to gather the power of the seven planetary pentacles into one; trace it with a pen for protection and harmony.",
-        v30:{price:"$14.99", jp:"", com:"", lulu:"https://www.lulu.com/shop/niko/the-grand-pentacle-of-solomon/paperback/product-454ymd7.html"},
-        v100:{price:"$19.99", jp:"", com:"", lulu:"https://www.lulu.com/shop/niko/the-grand-pentacle-of-solomon/paperback/product-gjzyg59.html"} },
+        v30:{price:"$14.99", jp:"", com:"https://www.amazon.com/dp/B0H7PR38NN", lulu:"https://www.lulu.com/shop/niko/the-grand-pentacle-of-solomon/paperback/product-454ymd7.html"},
+        v100:{price:"$19.99", jp:"", com:"https://www.amazon.com/dp/B0H7PCK9KW", lulu:"https://www.lulu.com/shop/niko/the-grand-pentacle-of-solomon/paperback/product-gjzyg59.html"} },
       { ja:"Angel Sigil: Eyael", en:"Seal of Yesod", tag:"Pen", imgs:["en_08_angel_sigil_eyael_0.jpg","en_08_angel_sigil_eyael_1.jpg","en_08_angel_sigil_eyael_2.jpg"],
         blurb:"The sigil of the angel Eyael, said to bring comfort and renewal; trace as a gentle daily ritual.",
         v30:{price:"$14.99", jp:"", com:"https://www.amazon.com/dp/B0H5MBWYH2", lulu:"https://www.lulu.com/shop/niko/angel-sigil-eyael-trace-30/paperback/product-m2e24q4.html"},
@@ -420,8 +420,8 @@ const SERIES = [
 ];
 
 const PLATFORMS = [
-  {key:"lulu", cls:"btn-jp",  label:"Buy on Lulu"},
-  {key:"com",  cls:"btn-com", label:"Amazon.com"}
+  {key:"com",  cls:"btn-com", label:"Amazon.com"},
+  {key:"lulu", cls:"btn-lulu",  label:"Buy on Lulu"}
 ];
 const SLIDE_LABELS = ["Cover","Trace page","Back"];
 
