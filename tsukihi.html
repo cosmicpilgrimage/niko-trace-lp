@@ -2,6 +2,15 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BJX9NZY3BV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BJX9NZY3BV');
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NIKO TSUKIHI（ニコ ツキヒ）｜新月と満月の焼納セレモニー</title>
 <meta name="description" content="あなたの想いを、シジルや祝詞とともに。新月と満月の夜、清らかに焼納いたします。セレモニーの記録を動画でお届けします。">
@@ -21,6 +30,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+section[id]{scroll-margin-top:72px}
 body{
   background:var(--washi);
   color:var(--ai);
@@ -197,6 +207,34 @@ footer a{color:var(--ai);text-decoration:none;border-bottom:1px solid var(--gin-
 footer a:hover{border-color:var(--honoo);color:var(--honoo)}
 footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.14em;font-size:.7rem}
 
+
+/* ---- グローバルナビ ---- */
+.site-head{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,250,248,.86);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--gin-pale);
+}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 28px}
+.site-head .brand{
+  font-family:'Shippori Mincho',serif;font-weight:500;
+  font-size:.98rem;letter-spacing:.2em;color:var(--ai);white-space:nowrap;
+}
+.nav{display:flex;gap:22px;font-size:.78rem;letter-spacing:.1em;color:var(--ai-soft)}
+.nav a{color:inherit;text-decoration:none;transition:color .2s;white-space:nowrap}
+.nav a:hover,.nav a:focus-visible{color:var(--honoo)}
+.nav-toggle{display:none}
+.nav-btn{display:none}
+@media (max-width:680px){
+  .nav-btn{display:flex;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;cursor:pointer;padding:5px;background:none;border:0}
+  .nav-btn span{display:block;height:1.5px;width:100%;background:var(--ai);border-radius:2px;transition:transform .25s, opacity .2s}
+  .nav{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--washi);border-bottom:1px solid var(--gin-pale);box-shadow:0 10px 24px rgba(38,65,94,.10);max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .nav a{padding:15px 28px;border-top:1px solid var(--gin-pale);font-size:.86rem}
+  .nav-toggle:checked ~ .nav{max-height:360px}
+  .nav-toggle:checked ~ .nav-btn span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-toggle:checked ~ .nav-btn span:nth-child(2){opacity:0}
+  .nav-toggle:checked ~ .nav-btn span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+}
+
 @media(max-width:680px){
   section{padding:66px 0}
   .hero{min-height:66vh}
@@ -213,6 +251,23 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.14em;font-size:.7
 </head>
 <body>
 
+<header class="site-head">
+  <div class="wrap">
+    <span class="brand">NIKO TSUKIHI</span>
+    <input type="checkbox" id="navtoggle" class="nav-toggle" hidden>
+    <label for="navtoggle" class="nav-btn" aria-label="メニュー"><span></span><span></span><span></span></label>
+    <nav class="nav">
+      <a href="#about">これは何か</a>
+      <a href="#flow">流れ</a>
+      <a href="#plans">プラン</a>
+      <a href="#faq">ご質問</a>
+      <a href="index.html">NIKO TRACE</a>
+      <a href="tsukihi_en.html">English</a>
+    </nav>
+  </div>
+</header>
+
+
 <!-- ═══ ヒーロー ═══ -->
 <header class="hero">
   <img class="hero-img" src="ja_tsukihi_hero.jpg" alt="竹の櫓の上で祝詞や手紙が焼納される様子。夜空には満月。">
@@ -228,7 +283,7 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.14em;font-size:.7
 </header>
 
 <!-- ═══ これは何か ═══ -->
-<section>
+<section id="about">
   <div class="wrap">
     <p class="eyebrow">これは何か</p>
     <p class="lead">
@@ -244,7 +299,7 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.14em;font-size:.7
 </section>
 
 <!-- ═══ 流れ ═══ -->
-<section class="band">
+<section class="band" id="flow">
   <div class="wrap">
     <h2><span class="moon full"></span>セレモニーの流れ</h2>
     <div class="steps">
@@ -288,7 +343,7 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.14em;font-size:.7
 </section>
 
 <!-- ═══ 動画 ═══ -->
-<section>
+<section id="video">
   <div class="wrap">
     <h2><span class="moon full"></span>セレモニーの記録</h2>
     <!-- ▼ デモ焼納の動画が撮れたら、この div ごと iframe に差し替え -->
@@ -393,7 +448,7 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.14em;font-size:.7
 </section>
 
 <!-- ═══ 日程 ═══ -->
-<section class="band">
+<section class="band" id="dates">
   <div class="wrap">
     <h2 class="center" style="justify-content:center"><span class="moon new"></span>次回のセレモニー</h2>
     <ul class="dates">
@@ -406,7 +461,7 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.14em;font-size:.7
 </section>
 
 <!-- ═══ FAQ ═══ -->
-<section>
+<section id="faq">
   <div class="wrap">
     <h2><span class="moon full"></span>よくあるご質問</h2>
     <div class="faq">
@@ -457,6 +512,27 @@ footer .copy{margin-left:auto;color:var(--gin);letter-spacing:.14em;font-size:.7
     </div>
   </div>
 </footer>
+
+
+<script>
+(function(){
+  var plans = {
+    'https://buy.stripe.com/aFaeVf3JIa9P1lwaKldfG00': 'light',
+    'https://buy.stripe.com/3cI3cx7ZY2Hne8i7y9dfG01': 'full'
+  };
+  document.querySelectorAll('.plan .btn').forEach(function(a){
+    a.addEventListener('click', function(){
+      if (typeof gtag === 'function') {
+        gtag('event','join_click',{
+          service: 'tsukihi',
+          plan: plans[a.getAttribute('href')] || 'unknown',
+          store: 'stripe'
+        });
+      }
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
