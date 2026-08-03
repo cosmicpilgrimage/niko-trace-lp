@@ -647,12 +647,18 @@ document.addEventListener('click', function(e){
   else if(url.indexOf('printify.me')>-1) store='Printify';
   else return;
   var card=a.closest('.book-card');
-  var t=card&&card.querySelector('.book-title');
+  var book='';
+  if(card){
+    var t=card.querySelector('.book-title');
+    if(t) book=(t.textContent||'').trim();
+    if(!book){ var te=card.querySelector('.book-en'); if(te) book=(te.textContent||'').trim(); }
+  }
   var v=a.closest('.variant');
+  var edition=v?(v.getAttribute('data-v')||''):'';
   if(typeof gtag==='function'){
     gtag('event','buy_click',{
-      book:(t?t.textContent:'').trim(),
-      edition:v?v.getAttribute('data-v'):'',
+      book:book||'(unknown)',
+      edition:edition,
       store:store,
       link_url:url
     });
