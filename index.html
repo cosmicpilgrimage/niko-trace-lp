@@ -149,6 +149,20 @@
   .foot-cta p{color:#F3ECDD;font-size:.95rem;line-height:2;margin-bottom:30px}
   .foot-btn{display:inline-block;background:var(--sumi);color:var(--gold-bright);font-weight:700;font-size:.9rem;letter-spacing:.14em;padding:14px 42px;border-radius:2px;transition:transform .2s, box-shadow .2s}
   .foot-btn:hover,.foot-btn:focus-visible{transform:translateY(-2px);box-shadow:0 10px 26px rgba(30,26,18,.35)}
+
+  /* ---------- back to top ---------- */
+  .back-to-top{
+    position:fixed;right:22px;bottom:22px;z-index:60;
+    width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;
+    background:var(--sumi);color:var(--gold-bright);
+    display:flex;align-items:center;justify-content:center;font-size:1.1rem;line-height:1;
+    box-shadow:0 8px 22px rgba(40,30,12,.28);
+    opacity:0;visibility:hidden;transform:translateY(10px);
+    transition:opacity .25s, transform .25s, visibility .25s, box-shadow .2s;
+  }
+  .back-to-top.show{opacity:1;visibility:visible;transform:none}
+  .back-to-top:hover,.back-to-top:focus-visible{box-shadow:0 10px 26px rgba(40,30,12,.36)}
+  @media (max-width:560px){.back-to-top{right:16px;bottom:16px;width:44px;height:44px}}
   .foot-meta{border-top:1px solid rgba(255,250,238,.28);padding-top:42px}
   .foot-meta .brand{color:#FFFCF4;display:block;margin-bottom:8px}
   .foot-meta .brand .en{color:var(--gold-bright)}
@@ -173,7 +187,7 @@
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .slides,.book-card,.btn,.hero-cta,.foot-btn{transition:none}
+    .slides,.book-card,.btn,.hero-cta,.foot-btn,.back-to-top{transition:none}
   }
   /* ---------- about ---------- */
   .about{padding:8px 24px 0;margin-top:80px}
@@ -675,6 +689,25 @@ document.addEventListener('click', function(e){
     });
   }
 });
+</script>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="ページの先頭へ戻る">&#9650;</button>
+<script>
+/* back to top */
+(function(){
+  var btn = document.getElementById('backToTop');
+  if(!btn) return;
+  var toggle = function(){
+    if(window.scrollY > 400){ btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  };
+  window.addEventListener('scroll', toggle, {passive:true});
+  toggle();
+  btn.addEventListener('click', function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:0, left:0, behavior: reduce ? 'auto' : 'smooth'});
+  });
+})();
 </script>
 </body>
 </html>
