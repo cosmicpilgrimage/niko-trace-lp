@@ -703,9 +703,26 @@ document.addEventListener('click', function(e){
   };
   window.addEventListener('scroll', toggle, {passive:true});
   toggle();
+
+  function easeInOutQuad(t){ return t<0.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2; }
+
+  function scrollToTopSlow(duration){
+    var startY = window.scrollY || window.pageYOffset;
+    if(startY <= 0) return;
+    var startTime = null;
+    function step(ts){
+      if(startTime === null) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      window.scrollTo({top: startY * (1 - easeInOutQuad(progress)), left: 0, behavior: 'auto'});
+      if(progress < 1){ requestAnimationFrame(step); }
+    }
+    requestAnimationFrame(step);
+  }
+
   btn.addEventListener('click', function(){
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({top:0, left:0, behavior: reduce ? 'auto' : 'smooth'});
+    if(reduce){ window.scrollTo(0, 0); return; }
+    scrollToTopSlow(1400);
   });
 })();
 </script>

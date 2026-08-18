@@ -411,8 +411,8 @@ const SERIES = [
         v100:{price:"$19.99", jp:"", com:"https://www.amazon.com/dp/B0HDN7ZXSW", lulu:""} },
       { ja:"Angel Sigil: Poyel", en:"Fortune \u00b7 Renown \u00b7 Flowering of Talent", tag:"Pen", imgs:["en_45_angel_sigil_poyel_0.jpg","en_45_angel_sigil_poyel_1.jpg","en_45_angel_sigil_poyel_2.jpg"],
         blurb:"The sigil of the angel Poyel, one of the 72 of the Shem HaMephorash, said to govern fortune, renown, and the flowering of talent.",
-        v30:{price:"$14.99", jp:"", com:"https://www.amazon.com/dp/B0H7PBR8YQ", lulu:""},
-        v100:{price:"$19.99", jp:"", com:"https://www.amazon.com/dp/B0H7PBR8YQ", lulu:""} },
+        v30:{price:"$14.99", jp:"", com:"https://www.amazon.com/dp/B0H7P3QKTM", lulu:"https://www.lulu.com/shop/niko/angel-sigil-tracing-sheet-poyel-30/paperback/product-84m9q68.html"},
+        v100:{price:"$19.99", jp:"", com:"https://www.amazon.com/dp/B0H7PBR8YQ", lulu:"https://www.lulu.com/shop/niko/angel-sigil-tracing-sheet-poyel-100/paperback/product-zmn9vr7.html"} },
     ]
   },
   {
@@ -509,7 +509,7 @@ const SERIES = [
         blurb:"The Futomani divination ring drawn in the ancient sacred script Woshite; trace it with a pen as a daily practice of good fortune.",
         v30:{price:"$14.99", jp:"", com:"https://www.amazon.com/dp/B0HFFT4Y44", lulu:""},
         v100:{price:"$19.99", jp:"", com:"https://www.amazon.com/dp/B0HFG4NYP7", lulu:""} },
-      { ja:"Tohokami Emitame Futomani", en:"Sacred Chant · Futomani Chart", tag:"Brush pen", imgs:["en_44_tohokami_emitame_futomani_0.jpg","","en_44_tohokami_emitame_futomani_2.jpg"],
+      { ja:"Tohokami Emitame Futomani", en:"Sacred Chant · Futomani Chart", tag:"Brush pen", imgs:["en_44_tohokami_emitame_futomani_0.jpg","en_44_tohokami_emitame_futomani_1.jpg","en_44_tohokami_emitame_futomani_2.jpg"],
         blurb:"The Futomani ring paired with Tohokami Emitame, a sacred Shinto chant; trace it with a brush pen to invite harmony and better fortune. Experiences vary; results are not guaranteed.",
         v30:{price:"$14.99", jp:"", com:"", lulu:""},
         v100:{price:"$19.99", jp:"", com:"https://www.amazon.com/dp/B0HFG15SKG", lulu:""} },
@@ -708,9 +708,26 @@ document.addEventListener('click', function(e){
   };
   window.addEventListener('scroll', toggle, {passive:true});
   toggle();
+
+  function easeInOutQuad(t){ return t<0.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2; }
+
+  function scrollToTopSlow(duration){
+    var startY = window.scrollY || window.pageYOffset;
+    if(startY <= 0) return;
+    var startTime = null;
+    function step(ts){
+      if(startTime === null) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      window.scrollTo({top: startY * (1 - easeInOutQuad(progress)), left: 0, behavior: 'auto'});
+      if(progress < 1){ requestAnimationFrame(step); }
+    }
+    requestAnimationFrame(step);
+  }
+
   btn.addEventListener('click', function(){
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({top:0, left:0, behavior: reduce ? 'auto' : 'smooth'});
+    if(reduce){ window.scrollTo(0, 0); return; }
+    scrollToTopSlow(1400);
   });
 })();
 </script>
