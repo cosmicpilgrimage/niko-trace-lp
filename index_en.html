@@ -726,8 +726,7 @@ document.addEventListener('click', function(e){
 
   btn.addEventListener('click', function(){
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce){ window.scrollTo(0, 0); return; }
-    scrollToTopSlow(3200);
+    scrollToTopSlow(reduce ? 1200 : 3200);
   });
 })();
 </script>
