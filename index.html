@@ -443,6 +443,18 @@ const SERIES = [
         blurb:"障害を取り除くとされる、智慧の神ガネーシャのヤントラ。",
         v30:{price:"¥1,980", jp:"https://www.amazon.co.jp/dp/B0HDKT88JG", com:"", lulu:""},
         v100:{price:"¥2,750", jp:"https://www.amazon.co.jp/dp/B0HDKLHZ13", com:"", lulu:""} },
+      { ja:"バガラームキー・ヤントラ", en:"Baglamukhi Yantra", tag:"ペン", imgs:["ja_44_baglamukhi_yantra_0.jpg","ja_44_baglamukhi_yantra_1.jpg","ja_44_baglamukhi_yantra_2.jpg"],
+        blurb:"心を静め、困難から守るとされる、バガラームキーのヤントラ。",
+        v30:{price:"¥1,980", jp:"https://www.amazon.co.jp/dp/B0HG7MFKN2", com:"", lulu:""},
+        v100:{price:"¥2,750", jp:"https://www.amazon.co.jp/dp/B0HG7QV8DT", com:"", lulu:""} },
+      { ja:"マハーカーリー・ヤントラ", en:"MahaKali Yantra", tag:"ペン", imgs:["ja_45_mahakali_yantra_0.jpg","ja_45_mahakali_yantra_1.jpg","ja_45_mahakali_yantra_2.jpg"],
+        blurb:"恐れを手放し、変容へ導くとされる、マハーカーリーのヤントラ。",
+        v30:{price:"¥1,980", jp:"https://www.amazon.co.jp/dp/B0HG7PWRC5", com:"", lulu:""},
+        v100:{price:"¥2,750", jp:"https://www.amazon.co.jp/dp/B0HG7Y3SJD", com:"", lulu:""} },
+      { ja:"ターラー・ヤントラ", en:"Tara Yantra", tag:"ペン", imgs:["ja_46_tara_yantra_0.jpg","ja_46_tara_yantra_1.jpg","ja_46_tara_yantra_2.jpg"],
+        blurb:"迷いを鎮め、道を照らすとされる、ターラーのヤントラ。",
+        v30:{price:"¥1,980", jp:"https://www.amazon.co.jp/dp/B0HG7PLZGS", com:"", lulu:""},
+        v100:{price:"¥2,750", jp:"https://www.amazon.co.jp/dp/B0HG7X4CK9", com:"", lulu:""} },
       { ja:"シギルム・デイ・アエメト", en:"The Sigillum Dei Aemeth", tag:"ペン", imgs:["ja_39_sigillum_dei_aemeth_0.jpg","ja_39_sigillum_dei_aemeth_1.jpg","ja_39_sigillum_dei_aemeth_2.jpg"],
         blurb:"「神の真実の印」とも呼ばれる、円形の護符。",
         v30:{price:"¥1,980", jp:"https://www.amazon.co.jp/dp/B0HDKMBDC9", com:"", lulu:""},
@@ -652,7 +664,7 @@ document.addEventListener("click", e=>{
     s.addEventListener("mouseenter", ()=>{
       if(reduce) return;
       clearInterval(t);
-      t=setInterval(()=>setSlide(s, +s.dataset.i + 1), 1100);
+      t=setInterval(()=>setSlide(s, +s.dataset.i + 1), 2400);
     });
     s.addEventListener("mouseleave", ()=>{
       clearInterval(t); setSlide(s, 0);
