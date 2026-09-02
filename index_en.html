@@ -84,7 +84,7 @@
   .intro .marks{margin-top:18px;font-size:.82rem;letter-spacing:.12em;color:var(--gold-deep)}
 
   /* ---------- series ---------- */
-  .series{padding:48px 0 8px}
+  .series{padding:48px 0 8px;scroll-margin-top:80px}
   .series-head{margin-bottom:6px}
   .series-eyebrow{display:block;font-family:var(--latin);font-style:italic;font-size:.92rem;letter-spacing:.2em;color:var(--gold-deep);margin-bottom:6px}
   .series-head h2{font-family:var(--mincho);font-weight:700;font-size:1.6rem;letter-spacing:.08em;color:var(--ink)}
@@ -340,7 +340,7 @@
    ============================================================ */
 const SERIES = [
   {
-    label:"Goetia Sigils", en:"ceremonial seals",
+    slug:"goetia", label:"Goetia Sigils", en:"ceremonial seals",
     note:"Traditional seals from Western ceremonial magic.",
     books:[
       { ja:"Goetia Sigil: Bune", en:"Seal of Fortune", tag:"Pen", imgs:["en_11_goetia_sigil_bune_0.jpg","en_11_goetia_sigil_bune_1.jpg","en_11_goetia_sigil_bune_2.jpg"],
@@ -378,7 +378,7 @@ const SERIES = [
     ]
   },
   {
-    label:"Angelic Sigils", en:"seals of the angels",
+    slug:"angels", label:"Angelic Sigils", en:"seals of the angels",
     note:"Sacred seals of the angels, traced as quiet protection.",
     books:[
       { ja:"7 Archangel Sigils", en:"Seals of the Seven", tag:"Pen", imgs:["en_07_7_archangel_sigils_0.jpg","en_07_7_archangel_sigils_1.jpg","en_07_7_archangel_sigils_2.jpg"],
@@ -416,7 +416,7 @@ const SERIES = [
     ]
   },
   {
-    label:"Sacred Geometry", en:"balance · by hand",
+    slug:"geometry", label:"Sacred Geometry", en:"balance · by hand",
     note:"Balanced geometric forms, drawn without compass or ruler.",
     books:[
       { ja:"Sri Yantra", en:"for Abundance & Beauty", tag:"Pen", imgs:["en_05_sri_yantra_0.jpg","en_05_sri_yantra_1.jpg","en_05_sri_yantra_2.jpg"],
@@ -470,7 +470,7 @@ const SERIES = [
     ]
   },
   {
-    label:"Sacred & Ancient Scripts", en:"japan · brush pen",
+    slug:"scripts", label:"Sacred & Ancient Scripts", en:"japan · brush pen",
     note:"Japanese sacred prayers and ancient scripts, traced with a brush pen.",
     books:[
       { ja:"Ryujin Norito", en:"Sacred Dragon Prayer", tag:"Brush pen", imgs:["en_00_ryujin_norito_0.jpg","en_00_ryujin_norito_1.jpg","en_00_ryujin_norito_2.jpg"],
@@ -599,7 +599,7 @@ function card(b){
 
 const main = document.getElementById("catalog");
 main.innerHTML = SERIES.map(s=>`
-  <section class="series">
+  <section class="series" id="${s.slug}">
     <div class="series-head"><span class="series-eyebrow">${s.en}</span><h2>${s.label}</h2></div>
     <p class="series-note">${s.note}</p>
     <hr class="trace-rule">

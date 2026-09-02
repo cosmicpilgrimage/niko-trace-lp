@@ -84,7 +84,7 @@
   .intro .marks{margin-top:18px;font-size:.82rem;letter-spacing:.12em;color:var(--gold-deep)}
 
   /* ---------- series ---------- */
-  .series{padding:48px 0 8px}
+  .series{padding:48px 0 8px;scroll-margin-top:80px}
   .series-head{margin-bottom:6px}
   .series-eyebrow{display:block;font-family:var(--latin);font-style:italic;font-size:.92rem;letter-spacing:.2em;color:var(--gold-deep);margin-bottom:6px}
   .series-head h2{font-family:var(--mincho);font-weight:700;font-size:1.6rem;letter-spacing:.08em;color:var(--ink)}
@@ -346,7 +346,7 @@
    ============================================================ */
 const SERIES = [
   {
-    label:"神聖文字・神代文字", en:"Sacred & Ancient Scripts",
+    slug:"scripts", label:"神聖文字・神代文字", en:"Sacred & Ancient Scripts",
     note:"筆ペンで綴る、和の祈りの文字。",
     books:[
       { ja:"龍神祝詞", en:"Ryūjin Norito", tag:"筆ペン", imgs:["ja_00_ry_jin_norito_0.jpg","ja_00_ry_jin_norito_1.jpg","ja_00_ry_jin_norito_2.jpg"],
@@ -366,7 +366,7 @@ const SERIES = [
         v30:{price:"¥1,980", jp:"https://www.amazon.co.jp/dp/B0FVW6QHFS", com:"", lulu:""},
         v100:{price:"¥2,750", jp:"https://www.amazon.co.jp/dp/B0FVGBBFCJ", com:"", lulu:""} },
       { ja:"黒背景ゴールド（龍文字・金）", en:"Gold on Black", tag:"金の筆ペン", imgs:["ja_04_gold_on_black_0.jpg","ja_04_gold_on_black_1.jpg","ja_04_gold_on_black_2.jpg"],
-        blurb:"黒地に金で綴る、特別な龍神祝詞。",
+        blurb:"黒地に金の筆ペンで描く、特別仕様の龍文字フトマニ図。",
         v30:{price:"¥2,310", jp:"https://www.amazon.co.jp/dp/B0FX8WRPN6", com:"", lulu:""},
         v100:{price:"¥3,300", jp:"https://www.amazon.co.jp/dp/B0FX8W5PH1", com:"", lulu:""} },
       { ja:"十種神寶祓詞", en:"Tokusa-no-Kandakara", tag:"筆ペン", imgs:["ja_05_tokusa_no_kandakara_0.jpg","ja_05_tokusa_no_kandakara_1.jpg","ja_05_tokusa_no_kandakara_2.jpg"],
@@ -420,7 +420,7 @@ const SERIES = [
     ]
   },
   {
-    label:"神聖幾何学", en:"Sacred Geometry",
+    slug:"geometry", label:"神聖幾何学", en:"Sacred Geometry",
     note:"コンパスのいらない、整った図形の瞑想。",
     books:[
       { ja:"シュリーヤントラ", en:"Shrī Yantra", tag:"ペン", imgs:["ja_08_shr_yantra_0.jpg","ja_08_shr_yantra_1.jpg","ja_08_shr_yantra_2.jpg"],
@@ -466,7 +466,7 @@ const SERIES = [
     ]
   },
   {
-    label:"天使のシジル", en:"Angelic Sigils",
+    slug:"angels", label:"天使のシジル", en:"Angelic Sigils",
     note:"聖なる護符を、線でたどる。",
     books:[
       { ja:"七大天使シジル", en:"Seven Archangels", tag:"ペン", imgs:["ja_12_seven_archangels_0.jpg","ja_12_seven_archangels_1.jpg","ja_12_seven_archangels_2.jpg"],
@@ -492,7 +492,7 @@ const SERIES = [
     ]
   },
   {
-    label:"魔術の護符", en:"Goetia Sigils",
+    slug:"goetia", label:"魔術の護符", en:"Goetia Sigils",
     note:"ペンで描く、西洋魔術の護符。",
     books:[
       { ja:"ブネ", en:"Bune", tag:"ペン", imgs:["ja_16_bune_0.jpg","ja_16_bune_1.jpg","ja_16_bune_2.jpg"],
@@ -577,7 +577,7 @@ function card(b){
 
 const main = document.getElementById("catalog");
 main.innerHTML = SERIES.map(s=>`
-  <section class="series">
+  <section class="series" id="${s.slug}">
     <div class="series-head"><span class="series-eyebrow">${s.en}</span><h2>${s.label}</h2></div>
     <p class="series-note">${s.note}</p>
     <hr class="trace-rule">
