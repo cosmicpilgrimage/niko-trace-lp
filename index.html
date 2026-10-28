@@ -217,7 +217,11 @@
   .dd-panel a{display:flex;justify-content:space-between;gap:18px;padding:9px 18px;white-space:nowrap;font-size:.84rem}
   .dd-panel a small{font-size:.74rem;color:var(--gold-deep);letter-spacing:.04em}
   .hero p{margin-bottom:20px}
-  .hero-search.finder-box{max-width:440px;margin:0 auto 22px}
+  .hero-search.finder-box{max-width:440px;margin:0 auto 16px}
+  .hero .suggest{max-width:480px;font-size:.84rem;color:#33280F;text-shadow:0 0 8px rgba(255,252,244,.96),0 1px 3px rgba(255,253,247,.96)}
+  .hero .suggest b{color:#33280F}
+  .hero .suggest button{font-size:.84rem;color:var(--bronze);border-bottom-color:var(--bronze);font-weight:700;text-shadow:inherit}
+  .hero .suggest button:hover{color:var(--sumi)}
   .hero-search input{background:rgba(255,252,244,.94);border-color:var(--gold-light);font-size:.98rem;padding:13px 44px 13px 46px;box-shadow:0 6px 20px rgba(60,42,12,.12)}
   .hero-search .glass{left:17px}
   .finder{padding-top:36px;padding-bottom:4px}
@@ -318,15 +322,12 @@
     <h1>なぞり書きシート</h1>
     <div class="hero-en">Trace &amp; Be Still</div>
     <p>なぞって、整える。内側に、スペースを空ける。<br>神聖文字とシジルを、一枚ずつ。</p>
-<div class="finder-box hero-search">
+    <div class="finder-box hero-search">
       <svg class="glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input type="search" id="q" placeholder="キーワードで探す　例：龍神" aria-label="本を検索" autocomplete="off" enterkeyhint="search">
       <button type="button" id="q-clear" aria-label="クリア" hidden>&times;</button>
     </div>
-    <div class="hero-cta-row">
-      <a class="hero-cta" href="#catalog"><span>本を見る</span><span class="scroll">scroll</span></a>
-      <a class="hero-cta hero-cta-alt" href="#matoi"><span>タトゥーシール</span><span class="scroll">new</span></a>
-    </div>
+    <div class="suggest" id="suggest"></div>
   </div>
 </section>
 
@@ -351,7 +352,6 @@
 </section>
 
 <section class="finder wrap" id="finder" aria-label="本を検索">
-  <div class="suggest" id="suggest"></div>
   <div class="chips" id="chips" role="group" aria-label="カテゴリで絞り込む"></div>
   <p class="finder-status"><span id="finder-status" role="status" aria-live="polite"></span><button type="button" id="finder-edit" hidden>検索を修正</button><button type="button" id="finder-clear" hidden>クリア</button></p>
   <div class="finder-empty" id="finder-empty" hidden><span id="finder-empty-msg"></span><br><button type="button" id="finder-reset"></button></div>
