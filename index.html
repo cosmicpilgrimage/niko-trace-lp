@@ -216,7 +216,13 @@
   .nav-dd:hover .dd-panel,.nav-dd:focus-within .dd-panel{opacity:1;visibility:visible;transform:none}
   .dd-panel a{display:flex;justify-content:space-between;gap:18px;padding:9px 18px;white-space:nowrap;font-size:.84rem}
   .dd-panel a small{font-size:.74rem;color:var(--gold-deep);letter-spacing:.04em}
-  .finder{padding-top:44px;padding-bottom:4px}
+  .hero p{margin-bottom:20px}
+  .hero-search.finder-box{max-width:440px;margin:0 auto 22px}
+  .hero-search input{background:rgba(255,252,244,.94);border-color:var(--gold-light);font-size:.98rem;padding:13px 44px 13px 46px;box-shadow:0 6px 20px rgba(60,42,12,.12)}
+  .hero-search .glass{left:17px}
+  .finder{padding-top:36px;padding-bottom:4px}
+  .finder-status button{font:inherit;font-size:.8rem;color:var(--gold-deep);background:transparent;border:0;border-bottom:1px dotted var(--gold);margin-left:14px;padding:1px 2px;cursor:pointer}
+  .finder-status button:hover{color:var(--ink);border-bottom-style:solid}
   .finder-box{position:relative;max-width:640px;margin:0 auto}
   .finder-box input{width:100%;font:inherit;font-size:1rem;letter-spacing:.04em;color:var(--ink);background:#FBF7EE;border:1px solid var(--line);border-radius:999px;padding:14px 46px 14px 48px;outline:none;transition:border-color .2s, box-shadow .2s;-webkit-appearance:none;appearance:none}
   .finder-box input::-webkit-search-cancel-button{display:none}
@@ -224,7 +230,7 @@
   .finder-box .glass{position:absolute;left:18px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--gold-deep);pointer-events:none}
   .finder-box button{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:0;background:transparent;color:var(--ink-soft);font-size:1.3rem;line-height:1;cursor:pointer}
   .finder-box button:hover{background:rgba(176,134,58,.12);color:var(--ink)}
-  .suggest{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 8px;max-width:760px;margin:14px auto 0;font-size:.8rem;color:var(--ink-soft)}
+  .suggest{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 8px;max-width:760px;margin:0 auto;font-size:.8rem;color:var(--ink-soft)}
   .suggest b{font-weight:500;letter-spacing:.08em;margin-right:2px}
   .suggest button{font:inherit;font-size:.8rem;color:var(--gold-deep);background:transparent;border:0;border-bottom:1px dotted var(--gold);padding:1px 2px;cursor:pointer}
   .suggest button:hover{color:var(--ink);border-bottom-style:solid}
@@ -312,6 +318,11 @@
     <h1>なぞり書きシート</h1>
     <div class="hero-en">Trace &amp; Be Still</div>
     <p>なぞって、整える。内側に、スペースを空ける。<br>神聖文字とシジルを、一枚ずつ。</p>
+<div class="finder-box hero-search">
+      <svg class="glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="q" placeholder="キーワードで探す　例：龍神" aria-label="本を検索" autocomplete="off" enterkeyhint="search">
+      <button type="button" id="q-clear" aria-label="クリア" hidden>&times;</button>
+    </div>
     <div class="hero-cta-row">
       <a class="hero-cta" href="#catalog"><span>本を見る</span><span class="scroll">scroll</span></a>
       <a class="hero-cta hero-cta-alt" href="#matoi"><span>タトゥーシール</span><span class="scroll">new</span></a>
@@ -340,14 +351,9 @@
 </section>
 
 <section class="finder wrap" id="finder" aria-label="本を検索">
-  <div class="finder-box">
-    <svg class="glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-    <input type="search" id="q" placeholder="キーワードで探す（例：龍神、金運、天使、ガネーシャ）" aria-label="本を検索" autocomplete="off" enterkeyhint="search">
-    <button type="button" id="q-clear" aria-label="クリア" hidden>&times;</button>
-  </div>
   <div class="suggest" id="suggest"></div>
   <div class="chips" id="chips" role="group" aria-label="カテゴリで絞り込む"></div>
-  <p class="finder-status" id="finder-status" role="status" aria-live="polite"></p>
+  <p class="finder-status"><span id="finder-status" role="status" aria-live="polite"></span><button type="button" id="finder-edit" hidden>検索を修正</button><button type="button" id="finder-clear" hidden>クリア</button></p>
   <div class="finder-empty" id="finder-empty" hidden><span id="finder-empty-msg"></span><br><button type="button" id="finder-reset"></button></div>
 </section>
 
@@ -849,7 +855,7 @@ document.addEventListener("click", e=>{
 };
   var SKW = {"scripts": "神代文字 祝詞 真言 お経 筆ペン 和 日本 神道 仏教 開運 浄化 祓い かいうん じょうか のりと しんごん おきょう ぶっきょう しんとう", "geometry": "神聖幾何学 ヤントラ 曼荼羅 マンダラ 図形 ペン インド カバラ まんだら しんせいきかがく", "angels": "天使 大天使 エンジェル 守護天使 シジル ペン てんし", "goetia": "ゴエティア ソロモン72柱 護符 シジル 魔術 ペン ごふ まじゅつ"};
   var SUGGEST = ["開運", "金運", "浄化", "守護", "龍神", "天使", "ヤントラ", "祝詞", "癒し", "ソロモン"];
-  var UI = {"all": "すべて", "popular": "よく探されるキーワード：", "showAll": "すべて表示に戻す",hit:function(n){return "該当 "+n+" 件";},total:function(n){return "全 "+n+" 冊";},none:function(q){return q ? "「"+q+"」に該当する本は見つかりませんでした。別のキーワードを試すか、カテゴリからお探しください。" : "該当する本がありません。";}};
+  var UI = {"all": "すべて", "popular": "よく探されるキーワード：", "showAll": "すべて表示に戻す",q:function(s){return "「"+s+"」　";},hit:function(n){return "該当 "+n+" 件";},total:function(n){return "全 "+n+" 冊";},none:function(q){return q ? "「"+q+"」に該当する本は見つかりませんでした。別のキーワードを試すか、カテゴリからお探しください。" : "該当する本がありません。";}};
 
   function norm(s){
     s = String(s||"").normalize("NFKC").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").normalize("NFC");
@@ -861,6 +867,7 @@ document.addEventListener("click", e=>{
   var chipsEl = document.getElementById("chips"), statusEl = document.getElementById("finder-status");
   var emptyEl = document.getElementById("finder-empty"), emptyMsg = document.getElementById("finder-empty-msg");
   var resetBtn = document.getElementById("finder-reset"), sugEl = document.getElementById("suggest");
+  var editBtn = document.getElementById("finder-edit"), clearBtn = document.getElementById("finder-clear");
   if(!q || typeof SERIES === "undefined") return;
 
   var cards = [], unmatched = [];
@@ -915,10 +922,12 @@ document.addEventListener("click", e=>{
       b.classList.toggle("zero", num === 0 && !on);
     });
     var filtering = t.length > 0 || cat !== "all";
-    statusEl.textContent = filtering ? UI.hit(n) : UI.total(cards.length);
+    statusEl.textContent = (q.value.trim() ? UI.q(q.value.trim()) : "") + (filtering ? UI.hit(n) : UI.total(cards.length));
     emptyEl.hidden = n > 0;
     if(n === 0) emptyMsg.textContent = UI.none(q.value.trim());
     clr.hidden = !q.value;
+    editBtn.hidden = !q.value.trim();
+    clearBtn.hidden = !filtering;
     try{
       var u = new URL(location.href);
       if(q.value.trim()) u.searchParams.set("q", q.value.trim()); else u.searchParams.delete("q");
@@ -938,10 +947,22 @@ document.addEventListener("click", e=>{
   }
 
   function resetAll(){ q.value = ""; cat = "all"; apply(false); }
+  function toResults(){
+    var f = document.getElementById("finder");
+    if(f && f.getBoundingClientRect().top > 120){
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      f.scrollIntoView({behavior: reduce ? "auto" : "smooth", block: "start"});
+    }
+  }
+  var scrollTimer = null;
 
-  q.addEventListener("input", function(){ apply(true); });
+  q.addEventListener("input", function(){
+    apply(true);
+    clearTimeout(scrollTimer);
+    if(q.value.trim()) scrollTimer = setTimeout(toResults, 900);
+  });
   q.addEventListener("keydown", function(e){
-    if(e.key === "Enter"){ e.preventDefault(); q.blur(); }
+    if(e.key === "Enter"){ e.preventDefault(); clearTimeout(scrollTimer); q.blur(); toResults(); }
     else if(e.key === "Escape"){ q.value = ""; apply(false); }
   });
   clr.addEventListener("click", function(){ q.value = ""; apply(false); q.focus(); });
@@ -954,8 +975,13 @@ document.addEventListener("click", e=>{
   });
   sugEl.addEventListener("click", function(e){
     var b = e.target.closest("button[data-q]"); if(!b) return;
-    q.value = b.dataset.q; apply(true);
+    q.value = b.dataset.q; apply(true); toResults();
   });
+  editBtn.addEventListener("click", function(){
+    window.scrollTo({top:0, behavior:"auto"});
+    q.focus(); q.select();
+  });
+  clearBtn.addEventListener("click", resetAll);
 
   /* category links (nav / QR anchors): clear filters so the target section is visible */
   var slugs = SERIES.map(function(s){return s.slug;});
