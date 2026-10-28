@@ -201,15 +201,61 @@
   .about-note{max-width:640px;margin:34px auto 0;text-align:center;font-size:.8rem;color:var(--ink-soft);line-height:1.9}
   @media (max-width:680px){.about-lead{grid-template-columns:1fr;gap:24px}.about-points{grid-template-columns:1fr}}
 
+
+  /* ---------- search / category finder ---------- */
+  [hidden]{display:none!important}
+  #catalog,#finder{scroll-margin-top:80px}
+  .nav-dd{position:relative}
+  .nav-dd::after{content:"";position:absolute;left:0;right:0;top:100%;height:26px}
+  .nav-dd>a::after{content:" \25BE";font-size:.75em;opacity:.7}
+  .dd-panel{position:absolute;top:calc(100% + 20px);left:-14px;min-width:210px;padding:8px 0;background:var(--paper);border:1px solid var(--line);border-radius:4px;box-shadow:0 12px 28px rgba(60,42,12,.14);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s, transform .18s, visibility .18s;z-index:60}
+  .nav-dd:hover .dd-panel,.nav-dd:focus-within .dd-panel{opacity:1;visibility:visible;transform:none}
+  .dd-panel a{display:flex;justify-content:space-between;gap:18px;padding:9px 18px;white-space:nowrap;font-size:.84rem}
+  .dd-panel a small{font-size:.74rem;color:var(--gold-deep);letter-spacing:.04em}
+  .finder{padding-top:44px;padding-bottom:4px}
+  .finder-box{position:relative;max-width:640px;margin:0 auto}
+  .finder-box input{width:100%;font:inherit;font-size:1rem;letter-spacing:.04em;color:var(--ink);background:#FBF7EE;border:1px solid var(--line);border-radius:999px;padding:14px 46px 14px 48px;outline:none;transition:border-color .2s, box-shadow .2s;-webkit-appearance:none;appearance:none}
+  .finder-box input::-webkit-search-cancel-button{display:none}
+  .finder-box input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(176,134,58,.18)}
+  .finder-box .glass{position:absolute;left:18px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--gold-deep);pointer-events:none}
+  .finder-box button{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:0;background:transparent;color:var(--ink-soft);font-size:1.3rem;line-height:1;cursor:pointer}
+  .finder-box button:hover{background:rgba(176,134,58,.12);color:var(--ink)}
+  .suggest{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 8px;max-width:760px;margin:14px auto 0;font-size:.8rem;color:var(--ink-soft)}
+  .suggest b{font-weight:500;letter-spacing:.08em;margin-right:2px}
+  .suggest button{font:inherit;font-size:.8rem;color:var(--gold-deep);background:transparent;border:0;border-bottom:1px dotted var(--gold);padding:1px 2px;cursor:pointer}
+  .suggest button:hover{color:var(--ink);border-bottom-style:solid}
+  .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:22px auto 0;max-width:900px}
+  .chip{font:inherit;font-size:.86rem;letter-spacing:.05em;color:var(--ink-soft);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+  .chip small{margin-left:6px;font-size:.76rem;color:var(--gold-deep)}
+  .chip:hover{border-color:var(--gold);color:var(--ink)}
+  .chip.on{background:linear-gradient(180deg,var(--gold-light),var(--gold));border-color:var(--gold);color:var(--sumi);font-weight:700}
+  .chip.on small{color:var(--sumi)}
+  .chip.zero{opacity:.4}
+  .finder-status{text-align:center;margin-top:16px;font-size:.84rem;letter-spacing:.06em;color:var(--ink-soft);min-height:1.4em}
+  .finder-empty{max-width:560px;margin:24px auto 8px;text-align:center;padding:26px 20px;border:1px dashed var(--gold-light);border-radius:6px;color:var(--ink-soft);font-size:.92rem;line-height:1.9}
+  .finder-empty button{font:inherit;margin-top:12px;font-size:.86rem;color:var(--sumi);background:linear-gradient(180deg,var(--gold-light),var(--gold));border:0;border-radius:3px;padding:9px 20px;cursor:pointer}
+  @media (max-width:860px){
+    .nav-dd::after{display:none}
+    .nav-dd>a{display:block}
+    .nav-dd>a::after{content:""}
+    .dd-panel{position:static;min-width:0;padding:0;border:0;border-radius:0;box-shadow:none;opacity:1;visibility:visible;transform:none;background:rgba(176,134,58,.06)}
+    .dd-panel a{padding:12px 24px 12px 44px;border-top:1px solid var(--line);font-size:.86rem}
+  }
+  @media (max-width:520px){
+    .finder{padding-top:32px}
+    .chips{gap:8px}
+    .chip{font-size:.82rem;padding:7px 13px}
+  }
+
   .nav-toggle{display:none}
   .nav-btn{display:none}
-  @media (max-width:680px){
+  @media (max-width:860px){
     .site-head .wrap{align-items:center}
     .nav-btn{display:flex;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;cursor:pointer;padding:5px;background:none;border:0}
     .nav-btn span{display:block;height:2px;width:100%;background:var(--ink);border-radius:2px;transition:transform .25s, opacity .2s}
     .nav{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--paper,#F5EEE0);border-bottom:1px solid var(--line);box-shadow:0 10px 24px rgba(60,42,12,.12);max-height:0;overflow:hidden;transition:max-height .3s ease}
     .nav a{padding:14px 24px;border-top:1px solid var(--line);font-size:.9rem}
-    .nav-toggle:checked ~ .nav{max-height:340px}
+    .nav-toggle:checked ~ .nav{max-height:640px}
     .nav-toggle:checked ~ .nav-btn span:nth-child(1){transform:translateY(7px) rotate(45deg)}
     .nav-toggle:checked ~ .nav-btn span:nth-child(2){opacity:0}
     .nav-toggle:checked ~ .nav-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
@@ -240,6 +286,7 @@
     <label for="navtoggle" class="nav-btn" aria-label="Menu"><span></span><span></span><span></span></label>
     <nav class="nav">
       <a href="#catalog">Books</a>
+      <div class="nav-dd"><a href="#finder">Categories</a><div class="dd-panel"><a href="#goetia">Goetia Sigils</a><a href="#angels">Angelic Sigils</a><a href="#geometry">Sacred Geometry</a><a href="#scripts">Sacred & Ancient Scripts</a></div></div>
       <a href="#about">What is tracing</a>
       <a href="#tsukihi">Ceremony</a>
       <a href="https://nikotrace.substack.com" target="_blank" rel="noopener">Substack</a>
@@ -282,6 +329,18 @@
     <div class="pt"><div class="pt-no">02</div><h3>No experience needed</h3><p>No calligraphy or drawing background required — simply focus on following the line.</p></div>
     <div class="pt"><div class="pt-no">03</div><h3>Easy to keep up</h3><p>Choose a 30-round or 100-round edition to match your mood and routine.</p></div>
   </div>
+</section>
+
+<section class="finder wrap" id="finder" aria-label="Search books">
+  <div class="finder-box">
+    <svg class="glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="search" id="q" placeholder="Search by keyword (e.g. protection, Solomon, yantra, dragon)" aria-label="Search books" autocomplete="off" enterkeyhint="search">
+    <button type="button" id="q-clear" aria-label="Clear" hidden>&times;</button>
+  </div>
+  <div class="suggest" id="suggest"></div>
+  <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+  <p class="finder-status" id="finder-status" role="status" aria-live="polite"></p>
+  <div class="finder-empty" id="finder-empty" hidden><span id="finder-empty-msg"></span><br><button type="button" id="finder-reset"></button></div>
 </section>
 
 <main id="catalog" class="wrap" style="padding-top:24px"></main>
@@ -711,6 +770,202 @@ document.addEventListener("click", e=>{
       clearInterval(t); setSlide(s, 0);
     });
   });
+})();
+</script>
+<script>
+/* search + category filter */
+(function(){
+  var LANG = "en";
+  var KEYFIELD = "ja";
+  var KW = {
+ "Goetia Sigil: Bune": "Goetia Lesser Key of Solomon Lemegeton 72 spirits sigil seal ceremonial magic abundance wealth prosperity eloquence protection",
+ "Goetia Sigil: Clauneck": "Goetia Lesser Key of Solomon Lemegeton 72 spirits sigil seal ceremonial magic wealth money fortune luck riches treasure",
+ "Goetia Sigil: Zagan": "Goetia Lesser Key of Solomon Lemegeton 72 spirits sigil seal ceremonial magic wisdom transformation change wit",
+ "Goetia Sigil: Saleos": "Goetia Lesser Key of Solomon Lemegeton 72 spirits sigil seal ceremonial magic love romance relationships harmony",
+ "Goetia Sigil: Buer": "Goetia Lesser Key of Solomon Lemegeton 72 spirits sigil seal ceremonial magic balance healing nature health wellness",
+ "Goetia Sigil: Paimon": "Goetia Lesser Key of Solomon Lemegeton 72 spirits sigil seal ceremonial magic knowledge learning study authority",
+ "Goetia Sigil: Bael": "Goetia Lesser Key of Solomon Lemegeton 72 spirits sigil seal ceremonial magic discretion strategy protection stealth",
+ "Goetia Sigil: Astaroth": "Goetia Lesser Key of Solomon Lemegeton 72 spirits sigil seal ceremonial magic wisdom insight truth learning",
+ "7 Archangel Sigils": "seven archangels angels Michael Gabriel Raphael Uriel sigil seal calm centered",
+ "The Grand Pentacle of Solomon": "Key of Solomon King Solomon pentacle pentagram talisman planetary pentacles protection amulet ward",
+ "Angel Sigil: Eyael": "angel sigil Shem HaMephorash 72 angels comfort renewal healing guardian angel",
+ "Angel Sigil: Anauel": "angel sigil Shem HaMephorash 72 angels prosperity wealth money abundance stability guardian angel",
+ "Angel Sigil: Harahel": "angel sigil Shem HaMephorash 72 angels wisdom creativity abundance learning guardian angel",
+ "Angel Sigil: Vehuiah": "angel sigil Shem HaMephorash 72 angels will new beginnings determination guardian angel",
+ "Angel Sigil: Rehael": "angel sigil Shem HaMephorash 72 angels healing health harmony guardian angel",
+ "Angel Sigil: Poyel": "angel sigil Shem HaMephorash 72 angels fortune luck renown fame talent creativity guardian angel",
+ "Armadel Sigil: Michael": "archangel Michael Grimoire of Armadel angel sigil seal protection courage strength",
+ "Armadel Sigil: Gabriel": "archangel Gabriel Grimoire of Armadel angel sigil seal revelation intuition communication clarity",
+ "Armadel Sigil: Raphael": "archangel Raphael Grimoire of Armadel angel sigil seal healing guidance soothing",
+ "Armadel Sigil: Uriel": "archangel Uriel Grimoire of Armadel angel sigil seal wisdom transformation insight clarity",
+ "Sri Yantra": "Shri Yantra Sri Yantra Shree yantra mandala India sacred geometry abundance beauty wealth lotus triangles",
+ "Ganesha Yantra": "Ganesh Ganesha Ganapati yantra India Hindu elephant remove obstacles new beginnings wisdom",
+ "Baglamukhi Yantra": "Bagalamukhi Baglamukhi Bagala yantra India Hindu Mahavidya stillness protection ward",
+ "MahaKali Yantra": "Kali Maha Kali Mahakali yantra India Hindu Mahavidya time transformation release fear",
+ "Tara Yantra": "Tara yantra India Hindu Buddhist Mahavidya guidance compassion clarity",
+ "Kamalatmika Yantra": "Kamala Kamalatmika Lakshmi yantra India Hindu Mahavidya wealth prosperity inner beauty abundance",
+ "Matangi Yantra": "Matangi yantra India Hindu Mahavidya expression creativity voice music speech art",
+ "Tripura Bhairavi Yantra": "Bhairavi Tripura Bhairavi yantra India Hindu Mahavidya protection inner strength courage anxiety",
+ "Sephirothic Tree": "Sephirot Sefirot Tree of Life Kabbalah Qabalah Jewish mysticism ten sephiroth inspiration center",
+ "Merkaba Star": "Merkabah Merkaba star tetrahedron light body sacred geometry balance soul body",
+ "Metatron's Cube": "Metatron cube Platonic solids Flower of Life sacred geometry order protection archangel",
+ "Lotus Mandala": "lotus flower mandala sacred geometry purify renew bloom meditation Buddhist",
+ "The Sigillum Dei Aemeth": "Sigillum Dei Aemeth Seal of God's Truth John Dee Enochian angelic magic heptagon pentagram rings seal",
+ "The Hexagram of Solomon": "Seal of Solomon Star of David hexagram six-pointed star two triangles protection harmony Kabbalah talisman ward barrier",
+ "Ryujin Norito": "Ryujin dragon god Japanese dragon deity Shinto prayer norito brush pen luck purification breath calm Japan",
+ "Misogi Oharae": "Misogi Ohharae Oharae Great Purification Shinto prayer norito cleansing calm Japan",
+ "Katakamuna Utahi": "Katakamuna Kata-kamuna ancient Japanese script spiral Japan sacred script Utahi",
+ "Futomani Chart": "Futomani Ryutai dragon script brush pen divination Japan sacred script ring chart",
+ "Futomani Chart · Gold": "Futomani Ryutai dragon script gold brush pen black background divination Japan sacred script ring chart gift",
+ "Fudo Jikushu": "Fudo Myoo Acala Fudo Myo-o mantra Buddhist protection wishes Japan shingon",
+ "Jikku Kannon Gyo": "Kannon Kanzeon Avalokiteshvara Guanyin sutra Buddhist compassion calm sutra copying shakyo Japan",
+ "Amatsu Norito": "Shinto prayer norito purification cleanse misfortune body mind Japan brush pen",
+ "Tenchi Issai Shojo Harahi": "Shinto Shugendo prayer purification cleanse space body mind Japan Harahi norito",
+ "Harae Kotoba": "Harae Shinto prayer purification cleansing misfortune rite Japan norito",
+ "Kurikara Ryuuou Shingon": "Kurikara dragon king Fudo Myoo Acala mantra Buddhist dragon protection Japan shingon",
+ "Hachidai Ryuuou Shingon": "Eight Dragon Kings Hachidai Ryuo dragon mantra Buddhist guardians blessing good fortune Japan shingon",
+ "Tohokami Emitame": "Tohokami Emitame Tohokamiemitame kototama Shinto prayer purification blessing three-fold purification Japan norito",
+ "Woshite Futomani": "Woshite Wosite Hotsuma Hotsuma Tsutae ancient script Japan Futomani 48 sounds sacred script mandala",
+ "Tohokami Emitame Futomani": "Tohokami Emitame Futomani Shinto chant kototama Japan sacred script harmony",
+ "Tokusa-no-Kandakara": "Tokusa Ten Sacred Treasures Totsukusa Shinto purification prayer Isonokami Japan Hifumi norito"
+};
+  var SKW = {"goetia": "Goetia sigils ceremonial magic seals pen", "angels": "angel sigils archangels guardian angels seals pen", "geometry": "sacred geometry yantra mandala Kabbalah pen", "scripts": "Japan Japanese sacred script ancient script norito mantra Shinto Buddhist brush pen purification"};
+  var SUGGEST = ["protection", "wealth", "healing", "dragon", "angel", "yantra", "Kabbalah", "purification", "Solomon", "wisdom"];
+  var UI = {"all": "All", "popular": "Popular searches:", "showAll": "Show all books",hit:function(n){return n+(n===1?" result":" results");},total:function(n){return n+" books";},none:function(q){return q ? "No books match “"+q+"”. Try another keyword or browse by category." : "No books found.";}};
+
+  function norm(s){
+    s = String(s||"").normalize("NFKC").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").normalize("NFC");
+    s = s.replace(/[ァ-ヶ]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0x60);});
+    return s.replace(/[\s　・･·ー\-–—_:：;；,，、。.'’"“”()（）\[\]「」『』!！?？\/]+/g,"");
+  }
+
+  var q = document.getElementById("q"), clr = document.getElementById("q-clear");
+  var chipsEl = document.getElementById("chips"), statusEl = document.getElementById("finder-status");
+  var emptyEl = document.getElementById("finder-empty"), emptyMsg = document.getElementById("finder-empty-msg");
+  var resetBtn = document.getElementById("finder-reset"), sugEl = document.getElementById("suggest");
+  if(!q || typeof SERIES === "undefined") return;
+
+  var cards = [], unmatched = [];
+  SERIES.forEach(function(s){
+    var sec = document.getElementById(s.slug);
+    if(!sec) return;
+    var arts = sec.querySelectorAll(".book-card");
+    s.books.forEach(function(b, i){
+      if(!arts[i]) return;
+      var extra = KW[b[KEYFIELD]];
+      if(!extra) unmatched.push(b[KEYFIELD]);
+      var fields = [b.ja, b.en, b.tag, b.blurb, s.label, s.en, SKW[s.slug], extra];
+      cards.push({el:arts[i], slug:s.slug, hay:fields.map(norm).join("|")});
+    });
+  });
+  window.__searchUnmatched = unmatched;
+
+  var cat = "all";
+  var chipDefs = [{slug:"all", label:UI.all}].concat(SERIES.map(function(s){return {slug:s.slug, label:s.label};}));
+  chipsEl.innerHTML = chipDefs.map(function(c){
+    return '<button type="button" class="chip" data-cat="'+c.slug+'" aria-pressed="false">'+c.label+'<small></small></button>';
+  }).join("");
+  sugEl.innerHTML = '<b>'+UI.popular+'</b>' + SUGGEST.map(function(w){return '<button type="button" data-q="'+w+'">'+w+'</button>';}).join("");
+  resetBtn.textContent = UI.showAll;
+
+  function terms(){
+    return q.value.split(/[\s　]+/).map(norm).filter(Boolean);
+  }
+  function match(c, t){ return t.every(function(x){return c.hay.indexOf(x) > -1;}); }
+
+  var lastFired = "", fireTimer = null;
+  function apply(track){
+    var t = terms(), n = 0, per = {}, perTotal = 0;
+    var showSlug = {};
+    cards.forEach(function(c){
+      var m = match(c, t);
+      if(m){ per[c.slug] = (per[c.slug]||0) + 1; perTotal++; }
+      var ok = m && (cat === "all" || c.slug === cat);
+      c.el.hidden = !ok;
+      if(ok){ n++; showSlug[c.slug] = 1; }
+    });
+    SERIES.forEach(function(s){
+      var sec = document.getElementById(s.slug);
+      if(sec) sec.hidden = !showSlug[s.slug];
+    });
+    chipsEl.querySelectorAll(".chip").forEach(function(b){
+      var k = b.dataset.cat, on = k === cat;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      var num = k === "all" ? perTotal : (per[k]||0);
+      b.querySelector("small").textContent = num;
+      b.classList.toggle("zero", num === 0 && !on);
+    });
+    var filtering = t.length > 0 || cat !== "all";
+    statusEl.textContent = filtering ? UI.hit(n) : UI.total(cards.length);
+    emptyEl.hidden = n > 0;
+    if(n === 0) emptyMsg.textContent = UI.none(q.value.trim());
+    clr.hidden = !q.value;
+    try{
+      var u = new URL(location.href);
+      if(q.value.trim()) u.searchParams.set("q", q.value.trim()); else u.searchParams.delete("q");
+      if(cat !== "all") u.searchParams.set("cat", cat); else u.searchParams.delete("cat");
+      history.replaceState(null, "", u.pathname + u.search + u.hash);
+    }catch(e){}
+    if(track){
+      clearTimeout(fireTimer);
+      var term = q.value.trim();
+      if(term && term !== lastFired){
+        fireTimer = setTimeout(function(){
+          lastFired = term;
+          if(typeof gtag === "function") gtag("event", "search", {search_term: term, results: n, category: cat});
+        }, 1200);
+      }
+    }
+  }
+
+  function resetAll(){ q.value = ""; cat = "all"; apply(false); }
+
+  q.addEventListener("input", function(){ apply(true); });
+  q.addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); q.blur(); }
+    else if(e.key === "Escape"){ q.value = ""; apply(false); }
+  });
+  clr.addEventListener("click", function(){ q.value = ""; apply(false); q.focus(); });
+  resetBtn.addEventListener("click", resetAll);
+  chipsEl.addEventListener("click", function(e){
+    var b = e.target.closest(".chip"); if(!b) return;
+    var k = b.dataset.cat;
+    cat = (k === cat) ? "all" : k;
+    apply(false);
+  });
+  sugEl.addEventListener("click", function(e){
+    var b = e.target.closest("button[data-q]"); if(!b) return;
+    q.value = b.dataset.q; apply(true);
+  });
+
+  /* category links (nav / QR anchors): clear filters so the target section is visible */
+  var slugs = SERIES.map(function(s){return s.slug;});
+  document.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id = a.getAttribute("href").slice(1);
+    if(slugs.indexOf(id) > -1 && (q.value || cat !== "all")){ resetAll(); }
+    var tg = document.getElementById("navtoggle"); if(tg) tg.checked = false;
+  });
+  window.addEventListener("hashchange", function(){
+    var id = location.hash.slice(1);
+    if(slugs.indexOf(id) > -1 && (q.value || cat !== "all")){
+      resetAll();
+      var el = document.getElementById(id); if(el) el.scrollIntoView();
+    }
+  });
+
+  /* initial state from ?q= / ?cat= */
+  try{
+    var p = new URLSearchParams(location.search);
+    if(p.get("q")) q.value = p.get("q");
+    var c0 = p.get("cat"); if(c0 && slugs.indexOf(c0) > -1) cat = c0;
+  }catch(e){}
+  apply(false);
+  if(q.value && location.hash === "" ){
+    var f = document.getElementById("finder"); if(f) setTimeout(function(){f.scrollIntoView();}, 50);
+  }
 })();
 </script>
 <script>
