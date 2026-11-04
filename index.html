@@ -208,7 +208,8 @@
 
   /* ---------- search / category finder ---------- */
   [hidden]{display:none!important}
-  #catalog,#finder{scroll-margin-top:80px}
+  #catalog{scroll-margin-top:80px}
+  #finder{scroll-margin-top:112px}
   .nav-dd{position:relative}
   .nav-dd::after{content:"";position:absolute;left:0;right:0;top:100%;height:26px}
   .nav-dd>a::after{content:" \25BE";font-size:.75em;opacity:.7}
@@ -245,7 +246,14 @@
   .chip.on{background:linear-gradient(180deg,var(--gold-light),var(--gold));border-color:var(--gold);color:var(--sumi);font-weight:700}
   .chip.on small{color:var(--sumi)}
   .chip.zero{opacity:.4}
-  .finder-status{text-align:center;margin-top:16px;font-size:.84rem;letter-spacing:.06em;color:var(--ink-soft);min-height:1.4em}
+  .finder-status{text-align:center;margin-top:16px;font-size:.92rem;letter-spacing:.06em;color:var(--ink);min-height:1.4em}
+  .finder-reset-row{text-align:center;margin-top:12px}
+  .reset-big{font:inherit;font-size:.9rem;font-weight:700;letter-spacing:.06em;color:var(--sumi);background:linear-gradient(180deg,var(--gold-light),var(--gold));border:0;border-radius:999px;padding:11px 26px;cursor:pointer;box-shadow:0 6px 16px rgba(176,134,58,.28);transition:transform .15s, box-shadow .15s}
+  .reset-big:hover,.reset-big:focus-visible{transform:translateY(-1px);box-shadow:0 10px 22px rgba(176,134,58,.38)}
+  .finder-foot{text-align:center;padding:30px 0 10px}
+  .filterbar{position:fixed;top:65px;left:0;right:0;z-index:45;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 16px;background:rgba(36,30,18,.95);color:var(--gold-bright);font-size:.86rem;letter-spacing:.05em;box-shadow:0 6px 18px rgba(40,30,12,.22)}
+  .filterbar span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .filterbar button{flex:none;font:inherit;font-size:.82rem;font-weight:700;color:var(--sumi);background:linear-gradient(180deg,var(--gold-light),var(--gold));border:0;border-radius:999px;padding:7px 16px;cursor:pointer;white-space:nowrap}
   .finder-empty{max-width:560px;margin:24px auto 8px;text-align:center;padding:26px 20px;border:1px dashed var(--gold-light);border-radius:6px;color:var(--ink-soft);font-size:.92rem;line-height:1.9}
   .finder-empty button{font:inherit;margin-top:12px;font-size:.86rem;color:var(--sumi);background:linear-gradient(180deg,var(--gold-light),var(--gold));border:0;border-radius:3px;padding:9px 20px;cursor:pointer}
   @media (max-width:860px){
@@ -256,6 +264,8 @@
     .dd-panel a{padding:12px 24px 12px 44px;border-top:1px solid var(--line);font-size:.86rem}
   }
   @media (max-width:520px){
+    .filterbar{gap:10px;padding:7px 12px;font-size:.82rem}
+    .filterbar span{white-space:normal;line-height:1.35}
     .finder{padding-top:32px}
     .chips{gap:8px}
     .chip{font-size:.82rem;padding:7px 13px}
@@ -351,13 +361,16 @@
   </div>
 </section>
 
+<div class="filterbar" id="filterbar" role="status" hidden><span id="fb-text"></span><button type="button" id="fb-btn">✕ すべて表示</button></div>
 <section class="finder wrap" id="finder" aria-label="本を検索">
   <div class="chips" id="chips" role="group" aria-label="カテゴリで絞り込む"></div>
-  <p class="finder-status"><span id="finder-status" role="status" aria-live="polite"></span><button type="button" id="finder-edit" hidden>検索を修正</button><button type="button" id="finder-clear" hidden>クリア</button></p>
+  <p class="finder-status"><span id="finder-status" role="status" aria-live="polite"></span><button type="button" id="finder-edit" hidden>検索を修正</button></p>
+  <div class="finder-reset-row"><button type="button" class="reset-big" id="finder-clear" hidden>✕ すべての本を表示</button></div>
   <div class="finder-empty" id="finder-empty" hidden><span id="finder-empty-msg"></span><br><button type="button" id="finder-reset"></button></div>
 </section>
 
 <main id="catalog" class="wrap" style="padding-top:24px"></main>
+<div class="finder-foot wrap" id="finder-foot" hidden><button type="button" class="reset-big" id="finder-foot-btn">✕ すべての本を表示</button></div>
 
 <section class="series matoi wrap" id="matoi">
   <div class="series-head"><span class="series-eyebrow">NIKO TRACE 纏 ／ MATOI</span><h2>タトゥーシール</h2></div>
@@ -546,6 +559,10 @@ const SERIES = [
         blurb:"宇宙と魂の神秘を表す、カバラの聖樹。",
         v30:{price:"¥1,980", jp:"https://www.amazon.co.jp/dp/B0HKGLWRCP", com:"", lulu:"", rakuten:"https://books.rakuten.co.jp/rb/18855049/?l-id=authorpage-item"},
         v100:{price:"¥3,080", jp:"https://www.amazon.co.jp/dp/B0HKGMLVPH", com:"", lulu:"", rakuten:"https://books.rakuten.co.jp/rb/18854849/?l-id=authorpage-item"} },
+      { ja:"ヘキサグラム・オブ・ソロモン", en:"The Hexagram of Solomon", tag:"ペン", imgs:["ja_61_hexagram_of_solomon_0.jpg","ja_61_hexagram_of_solomon_1.jpg","ja_61_hexagram_of_solomon_2.jpg"],
+        blurb:"守護と調和をもたらすとされる、ソロモン王に伝わる護符。",
+        v30:{price:"¥1,980", jp:"https://www.amazon.co.jp/dp/B0HQB7DMT7", com:"", lulu:"", rakuten:""},
+        v100:{price:"¥3,080", jp:"https://www.amazon.co.jp/dp/B0HQB8JH3S", com:"", lulu:"", rakuten:""} },
     ]
   },
   {
@@ -831,6 +848,7 @@ document.addEventListener("click", e=>{
  "Matangi Yantra": "マータンギー マタンギ ヤントラ 言葉 音楽 表現 創造 芸術 インド マハーヴィディヤー 十大女神",
  "Tripura Bhairavi Yantra": "トリプラバイラヴィ トリプラ バイラヴィ ヤントラ 守護 内なる力 執着 迷い インド マハーヴィディヤー 十大女神 しゅご",
  "The Sigillum Dei Aemeth": "シギルム シギルムデイアエメト 神の真実の印 神の印章 アエメト ジョンディー ジョン・ディー エノク エノク魔術 天使魔術 魔術 護符 円形 ごふ まじゅつ",
+ "The Hexagram of Solomon": "ヘキサグラム ソロモンの六芒星 六芒星 ソロモンの封印 ソロモン王 星形 正三角形 守護 守り 魔除け 結界 調和 護符 カバラ ユダヤ神秘主義 西洋魔術 神聖幾何学 シジル 印章 しゅご まよけ ごふ しんせいきかがく",
  "The Grand Pentacle of Solomon": "グランドペンタクル ペンタクル ソロモン ソロモン王 ソロモンの鍵 ソロモンの大きな鍵 護符 守護 魔除け 五芒星 魔術 しゅご まよけ ごふ まじゅつ",
  "Sephirothic Tree": "セフィロト セフィロトの樹 生命の樹 いのちの木 カバラ カバラの聖樹 ツリーオブライフ ユダヤ 神秘主義 10のセフィラ 宇宙 魂",
  "Seven Archangels": "七大天使 7大天使 大天使 天使 エンジェル ミカエル ガブリエル ラファエル ウリエル 守護天使 シジル てんし",
@@ -855,7 +873,7 @@ document.addEventListener("click", e=>{
 };
   var SKW = {"scripts": "神代文字 祝詞 真言 お経 筆ペン 和 日本 神道 仏教 開運 浄化 祓い かいうん じょうか のりと しんごん おきょう ぶっきょう しんとう", "geometry": "神聖幾何学 ヤントラ 曼荼羅 マンダラ 図形 ペン インド カバラ まんだら しんせいきかがく", "angels": "天使 大天使 エンジェル 守護天使 シジル ペン てんし", "goetia": "ゴエティア ソロモン72柱 護符 シジル 魔術 ペン ごふ まじゅつ"};
   var SUGGEST = ["開運", "金運", "浄化", "守護", "龍神", "天使", "ヤントラ", "祝詞", "癒し", "ソロモン"];
-  var UI = {"all": "すべて", "popular": "よく探されるキーワード：", "showAll": "すべて表示に戻す",q:function(s){return "「"+s+"」　";},hit:function(n){return "該当 "+n+" 件";},total:function(n){return "全 "+n+" 冊";},none:function(q){return q ? "「"+q+"」に該当する本は見つかりませんでした。別のキーワードを試すか、カテゴリからお探しください。" : "該当する本がありません。";}};
+  var UI = {"all": "すべて", "popular": "よく探されるキーワード：", "showAll": "すべて表示に戻す",qq:function(s){return "「"+s+"」";},bar:function(p,n){return p+" で絞り込み中・"+n+"件";},q:function(s){return "「"+s+"」　";},hit:function(n){return "該当 "+n+" 件";},total:function(n){return "全 "+n+" 冊";},none:function(q){return q ? "「"+q+"」に該当する本は見つかりませんでした。別のキーワードを試すか、カテゴリからお探しください。" : "該当する本がありません。";}};
 
   function norm(s){
     s = String(s||"").normalize("NFKC").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").normalize("NFC");
@@ -868,6 +886,9 @@ document.addEventListener("click", e=>{
   var emptyEl = document.getElementById("finder-empty"), emptyMsg = document.getElementById("finder-empty-msg");
   var resetBtn = document.getElementById("finder-reset"), sugEl = document.getElementById("suggest");
   var editBtn = document.getElementById("finder-edit"), clearBtn = document.getElementById("finder-clear");
+  var bar = document.getElementById("filterbar"), fbText = document.getElementById("fb-text"), fbBtn = document.getElementById("fb-btn");
+  var footEl = document.getElementById("finder-foot"), footBtn = document.getElementById("finder-foot-btn");
+  var isFiltering = false;
   if(!q || typeof SERIES === "undefined") return;
 
   var cards = [], unmatched = [];
@@ -928,6 +949,13 @@ document.addEventListener("click", e=>{
     clr.hidden = !q.value;
     editBtn.hidden = !q.value.trim();
     clearBtn.hidden = !filtering;
+    footEl.hidden = !filtering || n === 0;
+    isFiltering = filtering;
+    var parts = [];
+    if(q.value.trim()) parts.push(UI.qq(q.value.trim()));
+    if(cat !== "all"){ var cd = chipDefs.filter(function(c){return c.slug === cat;})[0]; if(cd) parts.push(cd.label); }
+    fbText.textContent = filtering ? UI.bar(parts.join(" \uff0f "), n) : "";
+    updateBar();
     try{
       var u = new URL(location.href);
       if(q.value.trim()) u.searchParams.set("q", q.value.trim()); else u.searchParams.delete("q");
@@ -947,6 +975,17 @@ document.addEventListener("click", e=>{
   }
 
   function resetAll(){ q.value = ""; cat = "all"; apply(false); }
+  function updateBar(){
+    var hide = !isFiltering || q.getBoundingClientRect().bottom > 70;
+    bar.hidden = hide;
+  }
+  function clearAndShow(){
+    resetAll();
+    var f = document.getElementById("finder");
+    if(f) f.scrollIntoView({block:"start"});
+  }
+  window.addEventListener("scroll", updateBar, {passive:true});
+  window.addEventListener("resize", updateBar);
   function toResults(){
     var f = document.getElementById("finder");
     if(f && f.getBoundingClientRect().top > 120){
@@ -981,7 +1020,9 @@ document.addEventListener("click", e=>{
     window.scrollTo({top:0, behavior:"auto"});
     q.focus(); q.select();
   });
-  clearBtn.addEventListener("click", resetAll);
+  clearBtn.addEventListener("click", clearAndShow);
+  fbBtn.addEventListener("click", clearAndShow);
+  footBtn.addEventListener("click", clearAndShow);
 
   /* category links (nav / QR anchors): clear filters so the target section is visible */
   var slugs = SERIES.map(function(s){return s.slug;});
