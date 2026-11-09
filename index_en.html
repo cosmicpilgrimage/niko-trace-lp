@@ -204,7 +204,8 @@
 
   /* ---------- search / category finder ---------- */
   [hidden]{display:none!important}
-  #catalog,#finder{scroll-margin-top:80px}
+  #catalog{scroll-margin-top:80px}
+  #finder{scroll-margin-top:112px}
   .nav-dd{position:relative}
   .nav-dd::after{content:"";position:absolute;left:0;right:0;top:100%;height:26px}
   .nav-dd>a::after{content:" \25BE";font-size:.75em;opacity:.7}
@@ -241,7 +242,14 @@
   .chip.on{background:linear-gradient(180deg,var(--gold-light),var(--gold));border-color:var(--gold);color:var(--sumi);font-weight:700}
   .chip.on small{color:var(--sumi)}
   .chip.zero{opacity:.4}
-  .finder-status{text-align:center;margin-top:16px;font-size:.84rem;letter-spacing:.06em;color:var(--ink-soft);min-height:1.4em}
+  .finder-status{text-align:center;margin-top:16px;font-size:.92rem;letter-spacing:.06em;color:var(--ink);min-height:1.4em}
+  .finder-reset-row{text-align:center;margin-top:12px}
+  .reset-big{font:inherit;font-size:.9rem;font-weight:700;letter-spacing:.06em;color:var(--sumi);background:linear-gradient(180deg,var(--gold-light),var(--gold));border:0;border-radius:999px;padding:11px 26px;cursor:pointer;box-shadow:0 6px 16px rgba(176,134,58,.28);transition:transform .15s, box-shadow .15s}
+  .reset-big:hover,.reset-big:focus-visible{transform:translateY(-1px);box-shadow:0 10px 22px rgba(176,134,58,.38)}
+  .finder-foot{text-align:center;padding:30px 0 10px}
+  .filterbar{position:fixed;top:65px;left:0;right:0;z-index:45;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 16px;background:rgba(36,30,18,.95);color:var(--gold-bright);font-size:.86rem;letter-spacing:.05em;box-shadow:0 6px 18px rgba(40,30,12,.22)}
+  .filterbar span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .filterbar button{flex:none;font:inherit;font-size:.82rem;font-weight:700;color:var(--sumi);background:linear-gradient(180deg,var(--gold-light),var(--gold));border:0;border-radius:999px;padding:7px 16px;cursor:pointer;white-space:nowrap}
   .finder-empty{max-width:560px;margin:24px auto 8px;text-align:center;padding:26px 20px;border:1px dashed var(--gold-light);border-radius:6px;color:var(--ink-soft);font-size:.92rem;line-height:1.9}
   .finder-empty button{font:inherit;margin-top:12px;font-size:.86rem;color:var(--sumi);background:linear-gradient(180deg,var(--gold-light),var(--gold));border:0;border-radius:3px;padding:9px 20px;cursor:pointer}
   @media (max-width:860px){
@@ -252,6 +260,8 @@
     .dd-panel a{padding:12px 24px 12px 44px;border-top:1px solid var(--line);font-size:.86rem}
   }
   @media (max-width:520px){
+    .filterbar{gap:10px;padding:7px 12px;font-size:.82rem}
+    .filterbar span{white-space:normal;line-height:1.35}
     .finder{padding-top:32px}
     .chips{gap:8px}
     .chip{font-size:.82rem;padding:7px 13px}
@@ -344,13 +354,16 @@
   </div>
 </section>
 
+<div class="filterbar" id="filterbar" role="status" hidden><span id="fb-text"></span><button type="button" id="fb-btn">✕ Show all</button></div>
 <section class="finder wrap" id="finder" aria-label="Search books">
   <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
-  <p class="finder-status"><span id="finder-status" role="status" aria-live="polite"></span><button type="button" id="finder-edit" hidden>Edit search</button><button type="button" id="finder-clear" hidden>Clear</button></p>
+  <p class="finder-status"><span id="finder-status" role="status" aria-live="polite"></span><button type="button" id="finder-edit" hidden>Edit search</button></p>
+  <div class="finder-reset-row"><button type="button" class="reset-big" id="finder-clear" hidden>✕ Show all books</button></div>
   <div class="finder-empty" id="finder-empty" hidden><span id="finder-empty-msg"></span><br><button type="button" id="finder-reset"></button></div>
 </section>
 
 <main id="catalog" class="wrap" style="padding-top:24px"></main>
+<div class="finder-foot wrap" id="finder-foot" hidden><button type="button" class="reset-big" id="finder-foot-btn">✕ Show all books</button></div>
 
 <section class="series matoi wrap" id="matoi">
   <div class="series-head"><span class="series-eyebrow">NIKO TRACE 纏 · MATOI</span><h2>Temporary Tattoos</h2></div>
@@ -611,10 +624,10 @@ const SERIES = [
         blurb:"The mantra of the Eight Dragon Kings, heavenly guardians said to bring blessing and good fortune; trace it with a pen for purification and the fulfillment of wishes.",
         v30:{price:"$14.99", jp:"", com:"https://www.amazon.com/dp/B0HG7VJWMN", lulu:"https://www.lulu.com/shop/niko/hachidai-ryuuou-shingon-a-sacred-dragon-king-mantra-tracing-workbook-trace-30/paperback/product-m2ev2em.html"},
         v100:{price:"$19.99", jp:"", com:"https://www.amazon.com/dp/B0HGRSFFNY", lulu:"https://www.lulu.com/shop/niko/hachidai-ryuuou-shingon-a-sacred-dragon-king-mantra-tracing-workbook-trace-100/paperback/product-v82n82d.html"} },
-      { ja:"Tohokami Emitame", en:"Ancient Shinto Kotodama", tag:"Pen", imgs:["en_41_tohokami_emitame_0.jpg","en_41_tohokami_emitame_1.jpg","en_41_tohokami_emitame_2.jpg"],
+      { ja:"Tohokami Emitame", en:"Ancient Shinto Kotodama", tag:"Pen", imgs:["en_58_tohokami_emitame_kdp_0.jpg","en_58_tohokami_emitame_kdp_1.jpg","en_58_tohokami_emitame_kdp_2.jpg"],
         blurb:"An eight-sound kototama prayer of old Shinto, spoken as words of cleansing and blessing; trace it with a pen, one character at a time.",
-        v30:{price:"$14.99", jp:"", com:"", lulu:"https://www.lulu.com/shop/niko/tohokami-emitame-a-sacred-shinto-kotodama-tracing-workbook-trace-30/paperback/product-v82n8yr.html"},
-        v100:{price:"$19.99", jp:"", com:"", lulu:"https://www.lulu.com/shop/niko/tohokami-emitame-a-sacred-shinto-kotodama-tracing-workbook-trace-100/paperback/product-454e5y7.html"} },
+        v30:{price:"$14.99", jp:"", com:"https://www.amazon.com/dp/B0HQXH4MQ7", lulu:"https://www.lulu.com/shop/niko/tohokami-emitame-a-sacred-shinto-kotodama-tracing-workbook-trace-30/paperback/product-v82n8yr.html"},
+        v100:{price:"$19.99", jp:"", com:"https://www.amazon.com/dp/B0HQX7DPT1", lulu:"https://www.lulu.com/shop/niko/tohokami-emitame-a-sacred-shinto-kotodama-tracing-workbook-trace-100/paperback/product-454e5y7.html"} },
       { ja:"Woshite Futomani", en:"The 48-Sound Sacred Mandala", tag:"Pen", imgs:["en_43_woshite_futomani_0.jpg","en_43_woshite_futomani_1.jpg","en_43_woshite_futomani_2.jpg"],
         blurb:"The Futomani divination ring drawn in the ancient sacred script Woshite; trace it with a pen as a daily practice of good fortune.",
         v30:{price:"$14.99", jp:"", com:"https://www.amazon.com/dp/B0HFFT4Y44", lulu:"https://www.lulu.com/shop/niko/woshite-futomani-diagram-sacred-script-tracing-sheet/paperback/product-nvnzpv5.html"},
@@ -838,7 +851,7 @@ document.addEventListener("click", e=>{
 };
   var SKW = {"goetia": "Goetia sigils ceremonial magic seals pen", "angels": "angel sigils archangels guardian angels seals pen", "geometry": "sacred geometry yantra mandala Kabbalah pen", "scripts": "Japan Japanese sacred script ancient script norito mantra Shinto Buddhist brush pen purification"};
   var SUGGEST = ["protection", "wealth", "healing", "dragon", "angel", "yantra", "Kabbalah", "purification", "Solomon", "wisdom"];
-  var UI = {"all": "All", "popular": "Popular searches:", "showAll": "Show all books",q:function(s){return "“"+s+"”: ";},hit:function(n){return n+(n===1?" result":" results");},total:function(n){return n+" books";},none:function(q){return q ? "No books match “"+q+"”. Try another keyword or browse by category." : "No books found.";}};
+  var UI = {"all": "All", "popular": "Popular searches:", "showAll": "Show all books",qq:function(s){return "“"+s+"”";},bar:function(p,n){return "Filtered by "+p+" · "+n+(n===1?" result":" results");},q:function(s){return "“"+s+"”: ";},hit:function(n){return n+(n===1?" result":" results");},total:function(n){return n+" books";},none:function(q){return q ? "No books match “"+q+"”. Try another keyword or browse by category." : "No books found.";}};
 
   function norm(s){
     s = String(s||"").normalize("NFKC").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").normalize("NFC");
@@ -851,6 +864,9 @@ document.addEventListener("click", e=>{
   var emptyEl = document.getElementById("finder-empty"), emptyMsg = document.getElementById("finder-empty-msg");
   var resetBtn = document.getElementById("finder-reset"), sugEl = document.getElementById("suggest");
   var editBtn = document.getElementById("finder-edit"), clearBtn = document.getElementById("finder-clear");
+  var bar = document.getElementById("filterbar"), fbText = document.getElementById("fb-text"), fbBtn = document.getElementById("fb-btn");
+  var footEl = document.getElementById("finder-foot"), footBtn = document.getElementById("finder-foot-btn");
+  var isFiltering = false;
   if(!q || typeof SERIES === "undefined") return;
 
   var cards = [], unmatched = [];
@@ -911,6 +927,13 @@ document.addEventListener("click", e=>{
     clr.hidden = !q.value;
     editBtn.hidden = !q.value.trim();
     clearBtn.hidden = !filtering;
+    footEl.hidden = !filtering || n === 0;
+    isFiltering = filtering;
+    var parts = [];
+    if(q.value.trim()) parts.push(UI.qq(q.value.trim()));
+    if(cat !== "all"){ var cd = chipDefs.filter(function(c){return c.slug === cat;})[0]; if(cd) parts.push(cd.label); }
+    fbText.textContent = filtering ? UI.bar(parts.join(" \uff0f "), n) : "";
+    updateBar();
     try{
       var u = new URL(location.href);
       if(q.value.trim()) u.searchParams.set("q", q.value.trim()); else u.searchParams.delete("q");
@@ -930,6 +953,17 @@ document.addEventListener("click", e=>{
   }
 
   function resetAll(){ q.value = ""; cat = "all"; apply(false); }
+  function updateBar(){
+    var hide = !isFiltering || q.getBoundingClientRect().bottom > 70;
+    bar.hidden = hide;
+  }
+  function clearAndShow(){
+    resetAll();
+    var f = document.getElementById("finder");
+    if(f) f.scrollIntoView({block:"start"});
+  }
+  window.addEventListener("scroll", updateBar, {passive:true});
+  window.addEventListener("resize", updateBar);
   function toResults(){
     var f = document.getElementById("finder");
     if(f && f.getBoundingClientRect().top > 120){
@@ -964,7 +998,9 @@ document.addEventListener("click", e=>{
     window.scrollTo({top:0, behavior:"auto"});
     q.focus(); q.select();
   });
-  clearBtn.addEventListener("click", resetAll);
+  clearBtn.addEventListener("click", clearAndShow);
+  fbBtn.addEventListener("click", clearAndShow);
+  footBtn.addEventListener("click", clearAndShow);
 
   /* category links (nav / QR anchors): clear filters so the target section is visible */
   var slugs = SERIES.map(function(s){return s.slug;});
